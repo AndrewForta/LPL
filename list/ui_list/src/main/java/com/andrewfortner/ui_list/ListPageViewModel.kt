@@ -2,8 +2,6 @@ package com.andrewfortner.ui_list
 
 import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andrewfortner.domain.Post
@@ -22,19 +20,15 @@ class ListPageViewModel : ViewModel() {
     private val _state = MutableStateFlow(ListPageState())
     val state: StateFlow<ListPageState> = _state.asStateFlow()
 
-    init {
-        updateScheduleList()
-    }
-
     private var imagePickerJob: Job? = null
 
     // Handle UI events here
-    @RequiresApi(Build.VERSION_CODES.P)
     fun onEvent(event: ListPageEvents) {
         when (event) {
             is ListPageEvents.Setup -> {
+                updateScheduleList()
                 _state.update {
-                    it.copy( context = event.context)
+                    it.copy(context = event.context)
                 }
                 if(imagePickerJob != null) imagePickerJob?.cancel()
                 imagePickerJob = viewModelScope.launch {
@@ -77,7 +71,6 @@ class ListPageViewModel : ViewModel() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
     fun updateSelectedIconUri(uri: Uri) {
         _state.update {
             it.copy(postList = _state.value.postList?.map {

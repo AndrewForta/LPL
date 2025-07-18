@@ -35,8 +35,7 @@ object ImageStorageManager {
         return file.delete()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun stringToBitMap(encodedString: String?): Bitmap? {
+        fun stringToBitMap(encodedString: String?): Bitmap? {
         return try {
             val encodeByte: ByteArray = Base64.getDecoder().decode(encodedString)
             BitmapFactory.decodeByteArray(
@@ -49,8 +48,7 @@ object ImageStorageManager {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun bitMapToString(bitmap: Bitmap?): String? {
+        fun bitMapToString(bitmap: Bitmap?): String? {
         if(bitmap == null)
             return null
 

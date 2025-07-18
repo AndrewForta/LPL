@@ -22,7 +22,6 @@ import com.andrewfortner.domain.Post
 import com.andrewfortner.ui_list.ImageStorageManager
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListItem(
